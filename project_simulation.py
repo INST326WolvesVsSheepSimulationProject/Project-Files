@@ -6,6 +6,9 @@
 #These next few lines of code will import the python libraries for turtle and random, and will assign a screen size of 600x600 to the desired window
 import turtle
 import random
+
+#These x and y variables are defined to be used later by the motion functions. They help make the comparisons for the objects so that 
+#they don't fly off the 600x600 screen.
 x = 300
 y = 300
 screen = turtle.Screen()
