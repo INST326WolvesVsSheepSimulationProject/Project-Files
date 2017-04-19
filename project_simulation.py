@@ -3,50 +3,7 @@
 #for food to eat, fight for dominance, cooperate as a community, reproduce, etc.
 #Your goal is for both your animal and the ecosystem to thrive.
 
-#These next few lines of code will import the python libraries for turtle and random, and will assign a screen size of 600x600 to the desired window
-import turtle
-import random
-
-#These x and y variables are defined to be used later by the motion functions. They help make the comparisons for the objects so that 
-#they don't fly off the 600x600 screen.
-x = 300
-y = 300
-screen = turtle.Screen()
-screen.screensize(600, 600)
-
-#Assigns the files of the three pictures to a variable
-img_dog = r"C:\Users\andre\PycharmProjects\project\Dog.gif"
-img_sheep = r"C:\Users\andre\PycharmProjects\project\LittleSheep.gif"
-img_wolf = r"C:\Users\andre\PycharmProjects\project\wolf.gif"
-
-#creates the three turtle objects, will need to create more sheep objects when working of reproduction
-dog = turtle.Turtle()
-sheep_leader = turtle.Turtle()
-wolf = turtle.Turtle()
-
-
-#Picks up the pen so that a line is not drawn
-dog.penup()
-sheep_leader.penup()
-wolf.penup()
-
-#Draws the 600x600 border
-test = turtle.Turtle()
-test.penup()
-test.fd(300)
-test.pendown()
-test.setheading(90)
-test.fd(300)
-test.setheading(180)
-test.fd(600)
-test.setheading(270)
-test.fd(600)
-test.setheading(0)
-test.fd(600)
-test.setheading(90)
-test.fd(300)
-
-#Function for the second initial sheep "sheep2"
+#Currently playing around with the function for the second initial sheep "sheep2"
 #def create_second_sheep():
     #sheep2 = turtle.Turtle()
     #sheep2.penup()
@@ -215,6 +172,7 @@ def make_random_walk(step_size, step_number):
                      3: go_left_sheep,
                      4: go_down_sheep
                      }
+    
     # Adds the images to the turtle objects for dog, sheep, and wolf, and assigns their position randomly within the 600x600 window
     wolf.hideturtle()
     screen.addshape(img_wolf)
@@ -234,8 +192,6 @@ def make_random_walk(step_size, step_number):
     sheep_leader.setpos(random.randint(1, 300), random.randint(1, 300))
     sheep_leader.showturtle()
 
-
-
 #Will use the step_number parameter to declare range of iteration
     for _ in range(step_number):
 
@@ -249,37 +205,84 @@ def make_random_walk(step_size, step_number):
         move_in_a_direction_sheep = move_dict_sheep[random.randint(1, 4)]
         move_in_a_direction_sheep(step_size)
 
+#This function will be called when the dog is in range of the wolf and attacks. The variables of strength for each animal (initialized below)
+#will determine which animal succeeds in killing the other.
 def dog_on_wolf():
     if dog_strength <= wolf_strength:
         dog.hideturtle()
     elif dog_strength > wolf_strength:
         wolf.hideturtle()
 
+#These next few lines of code will import the python libraries for turtle and random.
+import turtle
+import random
+
+#Draws the 600x600 border just for visual aesthetics
+test = turtle.Turtle()
+test.penup()
+test.fd(300)
+test.pendown()
+test.setheading(90)
+test.fd(300)
+test.setheading(180)
+test.fd(600)
+test.setheading(270)
+test.fd(600)
+test.setheading(0)
+test.fd(600)
+test.setheading(90)
+test.fd(300)
+
+#These x and y variables are defined to be used later by the motion functions. They help make the comparisons for the objects so that 
+#they don't fly off the 600x600 screen.
+x = 300
+y = 300
+
+#These statements will assign a screen size of 600x600 to the desired window
+screen = turtle.Screen()
+screen.screensize(600, 600)
+
+#Assigns the files of the three pictures to their respective variables
+img_dog = r"C:\Users\andre\PycharmProjects\project\Dog.gif"
+img_sheep = r"C:\Users\andre\PycharmProjects\project\LittleSheep.gif"
+img_wolf = r"C:\Users\andre\PycharmProjects\project\wolf.gif"
+
+#creates the three turtle objects, *(will need to create more sheep objects when working of reproduction)
+dog = turtle.Turtle()
+sheep_leader = turtle.Turtle()
+wolf = turtle.Turtle()
+
+#Picks up the pen so that a line is not drawn when the objects move
+dog.penup()
+sheep_leader.penup()
+wolf.penup()
+
+#Initializes the variables for step size (how large each movement will be) and step number (how many steps will be made)
 step_size = 15
 step_number = 1000
+
+#Intializes the dog and wolf strength variable from a random number between 1-50
 dog_strength = random.randint(1, 50)
 wolf_strength = random.randint(1, 50)
-#create_second_sheep()
-make_random_walk(step_size, step_number)
 
+#create_second_sheep()
+
+make_random_walk(step_size, step_number)
 
 turtle.mainloop()
 
 #Now with the wolf, sheep, and dog all moving together, we will need to:
 #   Spawn two additional sheep that stay near their initialized "leader".
+#   Make sure that these additional sheep stay within a certain distance of their leader. If they reach that distance, they'll need
+#   To be prompted to move closer to the leader
 
 #   Create a "reproduction occurance" that happens whenever two sheep occupy the same space (or are within a certain distance of each other)
 #       Initialize a respective variable "sheep_population" for comparison. Once the number of the sheep objects on the screen reaches that
 #       number than the sheep win the round.
 
-#   Use the "practice_hunt" code to give the wolf and the dog their characteristics of chasing each other
-#EXAMPLE CODE:
-#if (wolf.distance(prey.pos()) <= 64):
-#    wolf.goto(prey.pos())
-#   Now create a function to create the interaction for (wolf on sheep) (dog on wolf)
 # Wolf on sheep interactions should just make the sheep invisible and should give the wolf some health
-
-#   Initialize a variable "hunger" which will decrement with time. Once at zero the wolf will die.
+#   Must declare variables for wolf hunger and health
+#       Initialize a variable "hunger" which will decrement with time. Once at zero the wolf will die.
 
 #   Create a dictionary to keep track of which animal is winning
 
